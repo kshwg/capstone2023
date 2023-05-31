@@ -4,11 +4,11 @@ const bodyParser = require('body-parser');
 const app = express();
 app.use(bodyParser.json());
 
-// Data siswa (contoh sederhana)
-let students = [];
+// Data applicant (masih contoh sederhana)
+let applicant = [];
 
-// Endpoint untuk penginputan identitas siswa
-app.post('/students', (req, res) => {
+// Endpoint untuk penginputan identitas applicant
+app.post('/applicant', (req, res) => {
   const { name, age, grade } = req.body;
   
   // Validasi data yang diberikan
@@ -16,20 +16,37 @@ app.post('/students', (req, res) => {
     return res.status(400).json({ message: 'Nama, usia, dan kelas harus diisi.' });
   }
 
-  // Buat objek siswa baru
-  const newStudent = {
-    id: students.length + 1,
+  // Buat objek applicant baru
+  const newApplicant = {
+    id: applicant.length + 1,
     name,
     age,
     grade
   };
   
   // Tambahkan siswa baru ke dalam array
-  students.push(newStudent);
+  applicant.push(newApplicant);
 
   // Kirim respons ke client
-  res.status(201).json({ message: 'Identitas siswa berhasil ditambahkan.', student: newStudent });
+  res.status(201).json({ message: 'Identitas Applicant berhasil ditambahkan.', applicant: newApplicant });
 });
+
+// Endpoint untuk mendapatkan semua data applicant
+app.get('/applicant', (req, res) => {
+    res.json(applicant);
+  });
+  
+  // Endpoint untuk mendapatkan data siswa berdasarkan ID
+  app.get('/applicant/:id', (req, res) => {
+    const applicantId = parseInt(req.params.id);
+    const appl = applicant.find((applicant) => applicant.id === applicantId);
+  
+    if (!applicant) {
+      res.status(404).json({ message: 'Siswa Tidak Ditemukan!' });
+    } else {
+      res.json(appl);
+    }
+  });
 
 // Jalankan server
 app.listen(3000, () => {
