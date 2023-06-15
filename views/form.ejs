@@ -1,13 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Form Page</title>
-  <link rel="stylesheet" href="/styles/main.css">
+  <title>Input Data</title>
+  <style>
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"] {
+      width: 200px;
+      padding: 5px;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 5px 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
 </head>
 <body>
-  <h1>Form Page</h1>
-  <form action="/user/form" method="POST">
-    <!-- Form fields -->
+  <h2>Input Data</h2>
+  <form id="dataForm" method="POST" action="/data">
+    <% for (let i = 0; i < fields.length; i++) { %>
+      <label for="<%= fields[i] %>"><%= fields[i] %>:</label>
+      <input type="text" id="<%= fields[i] %>" name="<%= fields[i] %>">
+    <% } %>
     <button type="submit">Submit</button>
   </form>
 </body>

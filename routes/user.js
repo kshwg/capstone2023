@@ -5,9 +5,9 @@ const router = express.Router();
 const mysql = require('mysql');
 const connection = mysql.createConnection({
   host: 'localhost',
-  user: 'your_mysql_username',
-  password: 'your_mysql_password',
-  database: 'your_mysql_database'
+  user: 'root',
+  password: '',
+  database: 'scholarmatch_db'
 });
 
 router.get('/register', (req, res) => {
