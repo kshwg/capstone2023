@@ -1,4 +1,4 @@
-ScholarMatch
+Schoolient
 --
 The dataset used in this project is scraped from [https://bold.org/].  
 While working on this machine learning project, there are three tools that used the most :  
