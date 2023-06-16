@@ -1,5 +1,5 @@
 # Welcome to the Official Repository of Schoolient
-![images/Schoolient-1.png]
+![/../images/Schoolient-1.png]
   
 # Our Members
 We are part of Product Capstone Bangkit Batch 1 from Team C23-PC754  
