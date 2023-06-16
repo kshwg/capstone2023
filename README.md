@@ -1,5 +1,5 @@
 # Welcome to the Official Repository of Schoolient
-![logo](https://www.dropbox.com/s/3c3r2ciu21epfwg/Schoolient-2.png?dl=0)
+![logo](https://github.com/Namirachmi/capstone2023/blob/5d4feb1e6f5812cf6549276aee9e2d89befe412d/images/Schoolient-nobg.png)
   
 # Our Members
 We are part of Product Capstone Bangkit Batch 1 from Team C23-PC754  
