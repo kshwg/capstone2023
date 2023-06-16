@@ -1,0 +1,74 @@
+<html>
+<head></head>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+    <script lang="js">
+        
+        async function run(){
+            const trainPath = './source/trainset.csv';
+            const trainingData = tf.data.csv(trainPath, {
+                columnConfigs: {
+                    education_level: {
+                        isLabel: true
+                    }
+                }
+            });
+            
+            const convertedTrainingData = 
+                  trainingData.map(({xs, ys}) => {
+                      return{ xs: Object.values(xs), ys: Object.values(ys)};
+                  }).batch(10);
+            
+            const testPath = './source/testset.csv';
+            
+            const testingData = tf.data.csv(testPath, {
+                columnConfigs: {
+                    diagnosis: {
+                        isLabel: true
+                    }
+                }
+                
+            });
+
+            const convertedTestingData = 
+                  testingData.map(({xs, ys}) => {
+                      return{ xs: Object.values(xs), ys: Object.values(ys)};
+                  }).batch(10);
+                   
+            const numOfFeatures = (await trainingData.columnNames()).length - 1;
+            
+            // YOUR CODE HERE     
+            const model = tf.sequential();
+            model.add(tf.layers.dense({inputShape: 19, activation: "relu", units: 128}))
+            model.add(tf.layers.dense({activation: "relu", units: 64}))
+            model.add(tf.layers.dense({activation: "relu", units: 32}))
+            model.add(tf.layers.dense({activation: "softmax", units: 8}));
+            
+            model.compile({loss: "sparseCategoricalCrossentropy", optimizer: tf.train.adam(0.001), metrics: 'accuracy'});
+            
+            
+            await model.fitDataset(convertedTrainingData, 
+                             {epochs:10,
+                             callbacks:{
+                                  onEpochEnd: async(epoch, logs) =>{
+                                      console.log("Epoch: " + epoch + " Loss: " + logs.loss + " Accuracy: " + logs.acc);
+                                  }
+                              }});
+            await model.save('downloads://model');
+
+            const test = tf.tensor2d([6500000, 0.0, 3, 0, 2, 0, 0, 0, 3, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1], [1, 19]);
+            
+            const prediction = model.predict(test);
+            const pIndex = tf.argMax(prediction, axis=1).dataSync();
+            
+            const classNames = ["Fresh graduate", "SMA", "SMA-Sarjana",
+                                "SMP-SMA", "SMP-SMA-Sarjana", "SMP-SMA-Sarjana-Fresh graduate", 
+                                "Sarjana", "Sarjana-Fresh graduate"];
+            
+            //alert(prediction)
+            alert(classNames[pIndex])
+        }
+        run();
+    </script>
+<body>
+</body>
+</html>
