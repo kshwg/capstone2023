@@ -11,3 +11,6 @@ You can use Jupyter by installing Anaconda. Then if you want to start using Tens
 Here is a website that helps me the most :  
 [https://www.guru99.com/download-install-tensorflow.html]  
 It provides directions for Mac and Windows users.
+
+Mode Trained in this project deployed on Cloud Run using Flask Framework 
+endpoint : https://schoolient-ml-pcwabiafva-et.a.run.app/predict
