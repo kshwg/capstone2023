@@ -13,4 +13,5 @@ Here is a website that helps me the most :
 It provides directions for Mac and Windows users.
 
 Mode Trained in this project deployed on Cloud Run using Flask Framework 
-endpoint : https://schoolient-ml-pcwabiafva-et.a.run.app/predict
+
+Endpoint : https://schoolient-ml-pcwabiafva-et.a.run.app/predict
